@@ -12,6 +12,7 @@ module.exports = {
 		"rules": {
 			"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 			"no-tabs": 0,
-			"react/jsx-indent": [2, 'tab']
+			"react/jsx-indent": [2, 'tab'],
+			"indent": ["error", "tab"]
 		}
 };

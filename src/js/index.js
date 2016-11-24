@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import thunk from 'redux-thunk';
 
-import App from './App';
+import App from './containers/App';
 
 import reducers from './reducers';
 
