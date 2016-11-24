@@ -1,19 +1,37 @@
 import THREE from 'three';
 
 const initialState = {
-	counter: new THREE.Euler(),
+	rotation: new THREE.Euler(),
+	cubeWidth: 1,
+	cubeHeight: 1,
 };
 
 export default function todos(state = initialState, action) {
 	switch (action.type) {
-	case 'INCREMENT':
+	case 'ROTATE':
 		return {
 			...state,
-			counter: new THREE.Euler(
-				state.counter.x + 0.01,
-				state.counter.y + 0.01,
+			rotation: new THREE.Euler(
+				state.rotation.x + 0.01,
+				state.rotation.y + 0.01,
 				0,
 			),
+		};
+
+	case 'INCREMENT':
+		console.log({
+			...state,
+			[action.dimension]: state[action.dimension] + 1,
+		});
+		return {
+			...state,
+			[action.dimension]: state[action.dimension] + 1,
+		};
+
+	case 'DECREMENT':
+		return {
+			...state,
+			[action.dimension]: state[action.dimension] - 1,
 		};
 
 	default:

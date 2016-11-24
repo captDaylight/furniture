@@ -3,18 +3,23 @@ import React3 from 'react-three-renderer';
 import THREE from 'three';
 import { connect } from 'react-redux';
 
-import increment from '../actions/ui';
+import { rotate, increment, decrement } from '../actions/ui';
 
 class App extends Component {
 	constructor(props, context) {
 		super(props, context);
-		const { increment } = props;
+		const { rotate } = props;
 		// construct the position vector here, because if we use 'new' within render,
 		// React will think that things have changed when they have not.
 		this.cameraPosition = new THREE.Vector3(0, 0, 5);
 
+		const d = 20;
+
+    this.lightPosition = new THREE.Vector3(d, d, d);
+    this.lightTarget = new THREE.Vector3(0, 0, 0);
+
 		this._onAnimate = () => {
-			increment();
+			rotate();
 		};
 	}
 
@@ -22,10 +27,23 @@ class App extends Component {
 		const width = window.innerWidth;
 		const height = window.innerHeight;
 
-		const { ui: { counter }, increment } = this.props;
+		const { ui: { rotation, cubeWidth, cubeHeight }, rotate, increment, decrement } = this.props;
+		const d = 20;
 
 		return (
 			<div>
+				<div>
+					<div>
+						<button onClick={() => decrement('cubeWidth')}>-</button>
+							width: {cubeWidth}
+						<button onClick={() => increment('cubeWidth')}>+</button>
+					</div>
+					<div>
+						<button onClick={() => decrement('cubeHeight')}>-</button>
+							height: {cubeHeight}
+						<button onClick={() => increment('cubeHeight')}>+</button>
+					</div>
+				</div>
 				<React3
 					mainCamera="camera"
 					width={width}
@@ -44,15 +62,38 @@ class App extends Component {
 							far={500}
 							position={this.cameraPosition}
 						/>
+						<ambientLight
+	            color={0x666666}
+	          />
+	          <directionalLight
+	            color={0xffffff}
+	            intensity={1.75}
+
+	            castShadow
+
+	            shadowMapWidth={1024}
+	            shadowMapHeight={1024}
+
+	            shadowCameraLeft={-d}
+	            shadowCameraRight={d}
+	            shadowCameraTop={d}
+	            shadowCameraBottom={-d}
+
+	            shadowCameraFar={3 * d}
+	            shadowCameraNear={d}
+
+	            position={this.lightPosition}
+	            lookAt={this.lightTarget}
+	          />
 						<mesh
-							rotation={counter}
+							rotation={rotation}
 						>
 							<boxGeometry
-								width={2}
-								height={1}
+								width={cubeWidth}
+								height={cubeHeight}
 								depth={1}
 							/>
-							<meshBasicMaterial
+							<meshPhongMaterial
 								color={0xFA6ACC}
 							/>
 						</mesh>
@@ -66,5 +107,5 @@ class App extends Component {
 
 export default connect(
 	state => state,
-	{ increment },
+	{ rotate, increment, decrement },
 )(App);
