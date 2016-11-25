@@ -9,18 +9,24 @@ import {
 	decrement as decrementAction,
 } from '../actions/ui';
 
+import FloorAndWall from '../components/FloorAndWall';
+import Lights from '../components/Lights';
+
 class App extends Component {
 	constructor(props, context) {
 		super(props, context);
 		const { rotate } = props;
 		// construct the position vector here, because if we use 'new' within render,
 		// React will think that things have changed when they have not.
-		this.cameraPosition = new THREE.Vector3(0, 0, 5);
+		this.cameraPosition = new THREE.Vector3(5, 5, 5);
+		this.worldPosition = new THREE.Vector3(0, 0, 0);
 
 		const d = 20;
 
-		this.lightPosition = new THREE.Vector3(d, d, d);
+		this.lightPosition = new THREE.Vector3(0, 5, 5);
 		this.lightTarget = new THREE.Vector3(0, 0, 0);
+
+		this.boxPosition = new THREE.Vector3(0, 2, 2);
 
 		this.onAnimate = () => {
 			rotate();
@@ -36,6 +42,8 @@ class App extends Component {
 			increment,
 			decrement
 		} = this.props;
+
+		// TODO get rid of this
 		const d = 20;
 
 		return (
@@ -58,6 +66,9 @@ class App extends Component {
 					height={height}
 					onAnimate={this.onAnimate}
 					alpha
+					antialias
+					shadowMapEnabled
+					shadowMapSoft
 				>
 					<scene>
 						<orthographicCamera
@@ -70,45 +81,33 @@ class App extends Component {
 							near={0.5}
 							far={500}
 							position={this.cameraPosition}
+							lookAt={this.worldPosition}
 						/>
-						<ambientLight
-							color={0x666666}
+						<Lights
+							lightPosition={this.lightPosition}
+							lightTarget={this.lightTarget}
 						/>
-						<directionalLight
-							color={0xffffff}
-							intensity={1.75}
 
-							castShadow
 
-							shadowMapWidth={1024}
-							shadowMapHeight={1024}
-
-							shadowCameraLeft={-d}
-							shadowCameraRight={d}
-							shadowCameraTop={d}
-							shadowCameraBottom={-d}
-
-							shadowCameraFar={3 * d}
-							shadowCameraNear={d}
-
-							position={this.lightPosition}
-							lookAt={this.lightTarget}
-						/>
 						<mesh
 							rotation={rotation}
+							position={this.boxPosition}
+							castShadow
+							receiveShadow
 						>
 							<boxGeometry
 								width={cubeWidth}
 								height={cubeHeight}
 								depth={1}
 							/>
-							<meshPhongMaterial
+							<meshLambertMaterial
 								color={0xFA6ACC}
 							/>
 						</mesh>
+
+						<FloorAndWall />
 					</scene>
 				</React3>
-
 			</div>
 		);
 	}
