@@ -19,7 +19,9 @@ class App extends Component {
     this.lightTarget = new THREE.Vector3(0, 0, 0);
 
 		this._onAnimate = () => {
+			// console.log('test');
 			rotate();
+			// return;
 		};
 	}
 
@@ -54,10 +56,11 @@ class App extends Component {
 					<scene>
 						<orthographicCamera
 							name="camera"
-							left={-5}
-							right={5}
-							top={5}
-							bottom={-5}
+
+							left={width / -200}
+							right={width / 200}
+							top={height / 200}
+							bottom={height / -200}
 							near={0.5}
 							far={500}
 							position={this.cameraPosition}
