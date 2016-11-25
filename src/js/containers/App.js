@@ -3,7 +3,11 @@ import React3 from 'react-three-renderer';
 import THREE from 'three';
 import { connect } from 'react-redux';
 
-import { rotate, increment, decrement } from '../actions/ui';
+import {
+	rotate as rotateAction,
+	increment as incrementAction,
+	decrement as decrementAction,
+} from '../actions/ui';
 
 class App extends Component {
 	constructor(props, context) {
@@ -15,21 +19,23 @@ class App extends Component {
 
 		const d = 20;
 
-    this.lightPosition = new THREE.Vector3(d, d, d);
-    this.lightTarget = new THREE.Vector3(0, 0, 0);
+		this.lightPosition = new THREE.Vector3(d, d, d);
+		this.lightTarget = new THREE.Vector3(0, 0, 0);
 
-		this._onAnimate = () => {
-			// console.log('test');
+		this.onAnimate = () => {
 			rotate();
-			// return;
 		};
 	}
 
 	render() {
 		const width = window.innerWidth;
 		const height = window.innerHeight;
-
-		const { ui: { rotation, cubeWidth, cubeHeight }, rotate, increment, decrement } = this.props;
+		const {
+			ui: { rotation, cubeWidth, cubeHeight },
+			rotate,
+			increment,
+			decrement
+		} = this.props;
 		const d = 20;
 
 		return (
@@ -50,8 +56,8 @@ class App extends Component {
 					mainCamera="camera"
 					width={width}
 					height={height}
-					onAnimate={this._onAnimate}
-					alpha={true}
+					onAnimate={this.onAnimate}
+					alpha
 				>
 					<scene>
 						<orthographicCamera
@@ -66,28 +72,28 @@ class App extends Component {
 							position={this.cameraPosition}
 						/>
 						<ambientLight
-	            color={0x666666}
-	          />
-	          <directionalLight
-	            color={0xffffff}
-	            intensity={1.75}
+							color={0x666666}
+						/>
+						<directionalLight
+							color={0xffffff}
+							intensity={1.75}
 
-	            castShadow
+							castShadow
 
-	            shadowMapWidth={1024}
-	            shadowMapHeight={1024}
+							shadowMapWidth={1024}
+							shadowMapHeight={1024}
 
-	            shadowCameraLeft={-d}
-	            shadowCameraRight={d}
-	            shadowCameraTop={d}
-	            shadowCameraBottom={-d}
+							shadowCameraLeft={-d}
+							shadowCameraRight={d}
+							shadowCameraTop={d}
+							shadowCameraBottom={-d}
 
-	            shadowCameraFar={3 * d}
-	            shadowCameraNear={d}
+							shadowCameraFar={3 * d}
+							shadowCameraNear={d}
 
-	            position={this.lightPosition}
-	            lookAt={this.lightTarget}
-	          />
+							position={this.lightPosition}
+							lookAt={this.lightTarget}
+						/>
 						<mesh
 							rotation={rotation}
 						>
@@ -110,5 +116,9 @@ class App extends Component {
 
 export default connect(
 	state => state,
-	{ rotate, increment, decrement },
+	{
+		rotate: rotateAction,
+		increment: incrementAction,
+		decrement: decrementAction,
+	},
 )(App);
