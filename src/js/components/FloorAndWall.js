@@ -11,7 +11,6 @@ export default function FloorAndWall() {
 				// wall geometry
 			}
 			<mesh
-				castShadow
 				receiveShadow
 			>
 				<planeGeometry
@@ -28,7 +27,6 @@ export default function FloorAndWall() {
 			}
 			<mesh
 				rotation={floorRotation}
-				castShadow
 				receiveShadow
 			>
 				<planeGeometry
