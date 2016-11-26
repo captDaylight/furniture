@@ -67,12 +67,14 @@ class App extends Component {
 					onAnimate={this.onAnimate}
 					alpha
 					antialias
+					gammaInput
+					gammaOutput
 					shadowMapEnabled
-					shadowMapSoft
 				>
 					<scene>
 						<orthographicCamera
 							name="camera"
+							ref="camera"
 
 							left={width / -200}
 							right={width / 200}
@@ -80,14 +82,15 @@ class App extends Component {
 							bottom={height / -200}
 							near={0.5}
 							far={500}
+
 							position={this.cameraPosition}
 							lookAt={this.worldPosition}
+
 						/>
 						<Lights
 							lightPosition={this.lightPosition}
 							lightTarget={this.lightTarget}
 						/>
-
 
 						<mesh
 							rotation={rotation}

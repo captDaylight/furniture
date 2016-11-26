@@ -15,8 +15,8 @@ export default function FloorAndWall() {
 				receiveShadow
 			>
 				<planeGeometry
-					width={5}
-					height={5}
+					width={100}
+					height={100}
 				/>
 				<meshLambertMaterial
 					color={0xFADA00}
@@ -32,8 +32,8 @@ export default function FloorAndWall() {
 				receiveShadow
 			>
 				<planeGeometry
-					width={5}
-					height={5}
+					width={100}
+					height={100}
 				/>
 				<meshLambertMaterial
 					color={0x00DAFA}

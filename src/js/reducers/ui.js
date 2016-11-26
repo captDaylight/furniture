@@ -19,10 +19,6 @@ export default function todos(state = initialState, action) {
 		};
 
 	case 'INCREMENT':
-		console.log({
-			...state,
-			[action.dimension]: state[action.dimension] + 1,
-		});
 		return {
 			...state,
 			[action.dimension]: state[action.dimension] + 1,
