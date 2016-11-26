@@ -11,6 +11,7 @@ import {
 
 import FloorAndWall from '../components/FloorAndWall';
 import Lights from '../components/Lights';
+import Textures from '../components/Textures';
 
 class App extends Component {
 	constructor(props, context) {
@@ -91,6 +92,8 @@ class App extends Component {
 							lightPosition={this.lightPosition}
 							lightTarget={this.lightTarget}
 						/>
+
+						<Textures />
 
 						<mesh
 							rotation={rotation}

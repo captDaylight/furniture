@@ -14,11 +14,11 @@ export default function FloorAndWall() {
 				receiveShadow
 			>
 				<planeGeometry
-					width={100}
-					height={100}
+					width={25}
+					height={25}
 				/>
-				<meshLambertMaterial
-					color={0xFADA00}
+				<materialResource
+					resourceId="blueTileMaterial"
 				/>
 			</mesh>
 
@@ -30,11 +30,11 @@ export default function FloorAndWall() {
 				receiveShadow
 			>
 				<planeGeometry
-					width={100}
-					height={100}
+					width={25}
+					height={25}
 				/>
-				<meshLambertMaterial
-					color={0x00DAFA}
+				<materialResource
+					resourceId="blueTileMaterial"
 				/>
 			</mesh>
 		</group>
