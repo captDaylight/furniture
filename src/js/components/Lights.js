@@ -21,16 +21,16 @@ export default function Lights(props) {
 			</mesh>
 
 			<ambientLight
-				color={0xCCCCCC}
+				color={0xFFFFFF}
 			/>
 			<directionalLight
-				color={0xffffff}
+				color={0xAAAAAA}
 				intensity={1.50}
 
 				castShadow
 
-				shadowMapWidth={2048}
-				shadowMapHeight={2048}
+				shadowMapWidth={4096}
+				shadowMapHeight={4096}
 
 				shadowCameraLeft={-d}
 				shadowCameraRight={d}

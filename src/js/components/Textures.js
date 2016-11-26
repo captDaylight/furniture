@@ -11,7 +11,7 @@ export default function Textures() {
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
-				repeat={new THREE.Vector2(5, 5)}
+				repeat={new THREE.Vector2(50, 50)}
 			/>
 			<meshLambertMaterial
 				resourceId="blueMaterial"
@@ -62,7 +62,7 @@ export default function Textures() {
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
-				repeat={new THREE.Vector2(2, 2)}
+				repeat={new THREE.Vector2(5, 5)}
 			/>
 			<meshLambertMaterial
 				resourceId="bananasMaterial"

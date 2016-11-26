@@ -9,9 +9,10 @@ import {
 	decrement as decrementAction,
 } from '../actions/ui';
 
-import FloorAndWall from '../components/FloorAndWall';
+import OrthoCamera from '../components/OrthoCamera';
 import Lights from '../components/Lights';
 import Textures from '../components/Textures';
+import FloorAndWall from '../components/FloorAndWall';
 
 class App extends Component {
 	constructor(props, context) {
@@ -61,6 +62,7 @@ class App extends Component {
 						<button onClick={() => increment('cubeHeight')}>+</button>
 					</div>
 				</div>
+
 				<React3
 					mainCamera="camera"
 					width={width}
@@ -73,21 +75,13 @@ class App extends Component {
 					shadowMapEnabled
 				>
 					<scene>
-						<orthographicCamera
-							name="camera"
-							ref="camera"
-
-							left={width / -200}
-							right={width / 200}
-							top={height / 200}
-							bottom={height / -200}
-							near={0.5}
-							far={500}
-
-							position={this.cameraPosition}
-							lookAt={this.worldPosition}
-
+						<OrthoCamera
+							height={height}
+							width={width}
+							cameraPosition={this.cameraPosition}
+							worldPosition={this.worldPosition}
 						/>
+
 						<Lights
 							lightPosition={this.lightPosition}
 							lightTarget={this.lightTarget}
