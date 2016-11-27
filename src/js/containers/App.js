@@ -8,6 +8,7 @@ import {
 	increment as incrementAction,
 	decrement as decrementAction,
 } from '../actions/ui';
+import { setWindowSize as setWindowSizeAction } from '../actions/scene';
 
 import OrthoCamera from '../components/OrthoCamera';
 import Lights from '../components/Lights';
@@ -17,18 +18,24 @@ import FloorAndWall from '../components/FloorAndWall';
 class App extends Component {
 	constructor(props, context) {
 		super(props, context);
-		const { rotate } = props;
+		const { rotate, setWindowSize } = props;
 		// construct the position vector here, because if we use 'new' within render,
 		// React will think that things have changed when they have not.
 		this.cameraPosition = new THREE.Vector3(5, 5, 5);
 		this.worldPosition = new THREE.Vector3(0, 0, 0);
 
-		const d = 20;
-
 		this.lightPosition = new THREE.Vector3(0, 5, 5);
 		this.lightTarget = new THREE.Vector3(0, 0, 0);
 
 		this.boxPosition = new THREE.Vector3(0, 2, 2);
+
+		// set size of window on init
+		setWindowSize(window.innerWidth, window.innerHeight);
+
+		window.addEventListener('resize', () => {
+			// listen for changes in size of window and set new size
+			setWindowSize(window.innerWidth, window.innerHeight);
+		});
 
 		this.onAnimate = () => {
 			rotate();
@@ -36,10 +43,9 @@ class App extends Component {
 	}
 
 	render() {
-		const width = window.innerWidth;
-		const height = window.innerHeight;
 		const {
 			ui: { rotation, cubeWidth, cubeHeight },
+			scene: { windowWidth, windowHeight },
 			rotate,
 			increment,
 			decrement
@@ -65,8 +71,8 @@ class App extends Component {
 
 				<React3
 					mainCamera="camera"
-					width={width}
-					height={height}
+					width={windowWidth}
+					height={windowHeight}
 					onAnimate={this.onAnimate}
 					alpha
 					antialias
@@ -75,12 +81,6 @@ class App extends Component {
 					shadowMapEnabled
 				>
 					<scene>
-						<OrthoCamera
-							height={height}
-							width={width}
-							cameraPosition={this.cameraPosition}
-							worldPosition={this.worldPosition}
-						/>
 
 						<Lights
 							lightPosition={this.lightPosition}
@@ -88,6 +88,13 @@ class App extends Component {
 						/>
 
 						<Textures />
+
+						<OrthoCamera
+							width={windowWidth}
+							height={windowHeight}
+							cameraPosition={this.cameraPosition}
+							worldPosition={this.worldPosition}
+						/>
 
 						<mesh
 							rotation={rotation}
@@ -119,5 +126,6 @@ export default connect(
 		rotate: rotateAction,
 		increment: incrementAction,
 		decrement: decrementAction,
+		setWindowSize: setWindowSizeAction,
 	},
 )(App);

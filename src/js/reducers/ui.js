@@ -6,7 +6,7 @@ const initialState = {
 	cubeHeight: 1,
 };
 
-export default function todos(state = initialState, action) {
+export default function ui(state = initialState, action) {
 	switch (action.type) {
 	case 'ROTATE':
 		return {

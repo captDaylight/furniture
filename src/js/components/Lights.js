@@ -40,8 +40,6 @@ export default function Lights(props) {
 				shadowCameraFar={3 * d}
 				shadowCameraNear={0.01}
 
-				shadowDarkness={0.5}
-
 				position={props.lightPosition}
 				lookAt={props.lightTarget}
 			/>
