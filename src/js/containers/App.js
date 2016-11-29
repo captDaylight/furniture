@@ -14,6 +14,7 @@ import OrthoCamera from '../components/OrthoCamera';
 import Lights from '../components/Lights';
 import Textures from '../components/Textures';
 import FloorAndWall from '../components/FloorAndWall';
+import Bench from '../components/Bench';
 
 class App extends Component {
 	constructor(props, context) {
@@ -24,7 +25,7 @@ class App extends Component {
 		this.cameraPosition = new THREE.Vector3(5, 5, 5);
 		this.worldPosition = new THREE.Vector3(0, 0, 0);
 
-		this.lightPosition = new THREE.Vector3(0, 5, 5);
+		this.lightPosition = new THREE.Vector3(-4, 8, 5);
 		this.lightTarget = new THREE.Vector3(0, 0, 0);
 
 		this.boxPosition = new THREE.Vector3(0, 2, 2);
@@ -38,7 +39,7 @@ class App extends Component {
 		});
 
 		this.onAnimate = () => {
-			rotate();
+			// rotate();
 		};
 	}
 
@@ -96,22 +97,10 @@ class App extends Component {
 							worldPosition={this.worldPosition}
 						/>
 
-						<mesh
-							rotation={rotation}
+						<Bench
 							position={this.boxPosition}
-							castShadow
-							receiveShadow
-						>
-							<boxGeometry
-								width={cubeWidth}
-								height={cubeHeight}
-								depth={1}
-							/>
-							<meshLambertMaterial
-								color={0xFA6ACC}
-							/>
-						</mesh>
-
+							length={cubeWidth}
+						/>
 						<FloorAndWall />
 					</scene>
 				</React3>
