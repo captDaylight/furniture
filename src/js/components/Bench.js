@@ -7,7 +7,7 @@ const woodThickness = 0.1;
 export default function Bench(props) {
 
 	const { length } = props;
-	const legSpacing = length/2 - woodThickness/2;
+	const legSpacing = length/2 - woodThickness;
 
 	return (
 		<group
@@ -20,7 +20,7 @@ export default function Bench(props) {
 			>
 				<boxGeometry
 					width={length}
-					height={0.1}
+					height={woodThickness}
 					depth={benchWidth}
 				/>
 				<meshLambertMaterial
@@ -34,7 +34,7 @@ export default function Bench(props) {
 				castShadow
 			>
 				<boxGeometry
-					width={0.1}
+					width={woodThickness * 2}
 					height={1.5}
 					depth={benchWidth}
 				/>
@@ -49,7 +49,7 @@ export default function Bench(props) {
 				castShadow
 			>
 				<boxGeometry
-					width={0.1}
+					width={woodThickness * 2}
 					height={1.5}
 					depth={benchWidth}
 				/>

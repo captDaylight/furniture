@@ -19,7 +19,7 @@ import Bench from '../components/Bench';
 class App extends Component {
 	constructor(props, context) {
 		super(props, context);
-		const { rotate, setWindowSize } = props;
+		const { setWindowSize } = props;
 		// construct the position vector here, because if we use 'new' within render,
 		// React will think that things have changed when they have not.
 		this.cameraPosition = new THREE.Vector3(5, 5, 5);
@@ -39,21 +39,17 @@ class App extends Component {
 		});
 
 		this.onAnimate = () => {
-			// rotate();
+
 		};
 	}
 
 	render() {
 		const {
-			ui: { rotation, cubeWidth, cubeHeight },
+			ui: { cubeWidth, cubeHeight },
 			scene: { windowWidth, windowHeight },
-			rotate,
 			increment,
-			decrement
+			decrement,
 		} = this.props;
-
-		// TODO get rid of this
-		const d = 20;
 
 		return (
 			<div>
@@ -98,16 +94,32 @@ class App extends Component {
 						/>
 
 						<Bench
-							position={this.boxPosition}
 							length={cubeWidth}
 						/>
+
 						<FloorAndWall />
+
 					</scene>
 				</React3>
 			</div>
 		);
 	}
 }
+
+App.propTypes = {
+	ui: React.PropTypes.shape({
+		cubeWidth: React.PropTypes.number,
+		cubeHeight: React.PropTypes.number,
+	}),
+	scene: React.PropTypes.shape({
+		windowWidth: React.PropTypes.number,
+		windowHeight: React.PropTypes.number,
+	}),
+	increment: React.PropTypes.func,
+	decrement: React.PropTypes.func,
+	setWindowSize: React.PropTypes.func,
+};
+
 
 export default connect(
 	state => state,
