@@ -7,6 +7,7 @@ const initialState = {
 	worldPosition: new THREE.Vector3(0, 0, 0),
 	lightPosition: new THREE.Vector3(-4, 8, 5),
 	lightTarget: new THREE.Vector3(0, 0, 0),
+	units: 0, // 0 === imperial, 1 === metric
 };
 
 export default function scene(state = initialState, action) {
@@ -17,6 +18,14 @@ export default function scene(state = initialState, action) {
 			windowHeight: action.height,
 			windowWidth: action.width,
 		};
+
+	case 'SET_UNITS':
+		return action.units === 0 || action.units === 1
+		? {
+			...state,
+			units: action.units,
+		}
+		: state;
 
 	default:
 		return state;
