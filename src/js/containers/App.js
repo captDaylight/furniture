@@ -20,15 +20,6 @@ class App extends Component {
 	constructor(props, context) {
 		super(props, context);
 		const { setWindowSize } = props;
-		// construct the position vector here, because if we use 'new' within render,
-		// React will think that things have changed when they have not.
-		this.cameraPosition = new THREE.Vector3(5, 5, 5);
-		this.worldPosition = new THREE.Vector3(0, 0, 0);
-
-		this.lightPosition = new THREE.Vector3(-4, 8, 5);
-		this.lightTarget = new THREE.Vector3(0, 0, 0);
-
-		this.boxPosition = new THREE.Vector3(0, 2, 2);
 
 		// set size of window on init
 		setWindowSize(window.innerWidth, window.innerHeight);
@@ -46,7 +37,14 @@ class App extends Component {
 	render() {
 		const {
 			ui: { cubeWidth, cubeHeight },
-			scene: { windowWidth, windowHeight },
+			scene: {
+				windowWidth,
+				windowHeight,
+				cameraPosition,
+				worldPosition,
+				lightPosition,
+				lightTarget,
+			},
 			increment,
 			decrement,
 		} = this.props;
@@ -80,8 +78,8 @@ class App extends Component {
 					<scene>
 
 						<Lights
-							lightPosition={this.lightPosition}
-							lightTarget={this.lightTarget}
+							lightPosition={lightPosition}
+							lightTarget={lightTarget}
 						/>
 
 						<Textures />
@@ -89,8 +87,8 @@ class App extends Component {
 						<OrthoCamera
 							width={windowWidth}
 							height={windowHeight}
-							cameraPosition={this.cameraPosition}
-							worldPosition={this.worldPosition}
+							cameraPosition={cameraPosition}
+							worldPosition={worldPosition}
 						/>
 
 						<Bench
@@ -114,6 +112,10 @@ App.propTypes = {
 	scene: React.PropTypes.shape({
 		windowWidth: React.PropTypes.number,
 		windowHeight: React.PropTypes.number,
+		cameraPosition: React.PropTypes.instanceOf(THREE.Vector3),
+		worldPosition: React.PropTypes.instanceOf(THREE.Vector3),
+		lightPosition: React.PropTypes.instanceOf(THREE.Vector3),
+		lightTarget: React.PropTypes.instanceOf(THREE.Vector3),
 	}),
 	increment: React.PropTypes.func,
 	decrement: React.PropTypes.func,

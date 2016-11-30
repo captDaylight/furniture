@@ -18,5 +18,6 @@ ReactDOM.render(
 		<Router history={browserHistory}>
 			<Route path="/" component={App} />
 		</Router>
-	</Provider>), document.getElementById('root')
+	</Provider>),
+	document.getElementById('root'),
 );

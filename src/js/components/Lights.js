@@ -4,11 +4,13 @@ import THREE from 'three';
 // TODO get rid of this
 const d = 20;
 
-export default function Lights(props) {
+function Lights(props) {
+	const { lightPosition, lightTarget } = props;
+
 	return (
 		<group>
 			<mesh
-				position={props.lightPosition}
+				position={lightPosition}
 			>
 				<boxGeometry
 					width={0.1}
@@ -40,9 +42,16 @@ export default function Lights(props) {
 				shadowCameraFar={3 * d}
 				shadowCameraNear={0.01}
 
-				position={props.lightPosition}
-				lookAt={props.lightTarget}
+				position={lightPosition}
+				lookAt={lightTarget}
 			/>
 		</group>
 	);
 }
+
+Lights.propTypes = {
+	lightPosition: React.PropTypes.instanceOf(THREE.Vector3),
+	lightTarget: React.PropTypes.instanceOf(THREE.Vector3),
+};
+
+export default Lights;

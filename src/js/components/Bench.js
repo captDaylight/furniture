@@ -4,10 +4,9 @@ import THREE from 'three';
 const benchWidth = 1;
 const woodThickness = 0.1;
 
-export default function Bench(props) {
-
+function Bench(props) {
 	const { length } = props;
-	const legSpacing = length/2 - woodThickness;
+	const legSpacing = (length / 2) - woodThickness;
 
 	return (
 		<group
@@ -60,3 +59,9 @@ export default function Bench(props) {
 		</group>
 	);
 }
+
+Bench.propTypes = {
+	length: React.PropTypes.number,
+};
+
+export default Bench;
