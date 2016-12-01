@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import React3 from 'react-three-renderer';
 import THREE from 'three';
 import { connect } from 'react-redux';
 
@@ -10,13 +9,9 @@ import {
 } from '../actions/ui';
 import { setWindowSize as setWindowSizeAction } from '../actions/scene';
 
-import OrthoCamera from '../components/OrthoCamera';
-import Lights from '../components/Lights';
-import Textures from '../components/Textures';
-import FloorAndWall from '../components/FloorAndWall';
-import Bench from '../components/Bench';
+import Scene from '../components/Scene';
 
-class App extends Component {
+class Custom extends Component {
 	constructor(props, context) {
 		super(props, context);
 		const { setWindowSize } = props;
@@ -28,15 +23,11 @@ class App extends Component {
 			// listen for changes in size of window and set new size
 			setWindowSize(window.innerWidth, window.innerHeight);
 		});
-
-		this.onAnimate = () => {
-
-		};
 	}
 
 	render() {
 		const {
-			ui: { cubeWidth, cubeHeight },
+			ui,
 			scene: {
 				windowWidth,
 				windowHeight,
@@ -47,6 +38,7 @@ class App extends Component {
 			},
 			increment,
 			decrement,
+			children,
 		} = this.props;
 
 		return (
@@ -54,57 +46,32 @@ class App extends Component {
 				<div>
 					<div>
 						<button onClick={() => decrement('cubeWidth')}>-</button>
-							width: {cubeWidth}
+							width: {ui.cubeWidth}
 						<button onClick={() => increment('cubeWidth')}>+</button>
 					</div>
 					<div>
 						<button onClick={() => decrement('cubeHeight')}>-</button>
-							height: {cubeHeight}
+							height: {ui.cubeHeight}
 						<button onClick={() => increment('cubeHeight')}>+</button>
 					</div>
 				</div>
 
-				<React3
-					mainCamera="camera"
-					width={windowWidth}
-					height={windowHeight}
-					onAnimate={this.onAnimate}
-					alpha
-					antialias
-					gammaInput
-					gammaOutput
-					shadowMapEnabled
+				<Scene
+					windowWidth={windowWidth}
+					windowHeight={windowHeight}
+					cameraPosition={cameraPosition}
+					worldPosition={worldPosition}
+					lightPosition={lightPosition}
+					lightTarget={lightTarget}
 				>
-					<scene>
-
-						<Lights
-							lightPosition={lightPosition}
-							lightTarget={lightTarget}
-						/>
-
-						<Textures />
-
-						<OrthoCamera
-							width={windowWidth}
-							height={windowHeight}
-							cameraPosition={cameraPosition}
-							worldPosition={worldPosition}
-						/>
-
-						<Bench
-							length={cubeWidth}
-						/>
-
-						<FloorAndWall />
-
-					</scene>
-				</React3>
+					{React.cloneElement(children, { ui })}
+				</Scene>
 			</div>
 		);
 	}
 }
 
-App.propTypes = {
+Custom.propTypes = {
 	ui: React.PropTypes.shape({
 		cubeWidth: React.PropTypes.number,
 		cubeHeight: React.PropTypes.number,
@@ -122,7 +89,6 @@ App.propTypes = {
 	setWindowSize: React.PropTypes.func,
 };
 
-
 export default connect(
 	state => state,
 	{
@@ -131,4 +97,4 @@ export default connect(
 		decrement: decrementAction,
 		setWindowSize: setWindowSizeAction,
 	},
-)(App);
+)(Custom);
