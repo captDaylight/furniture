@@ -6,6 +6,7 @@ import OrthoCamera from './OrthoCamera';
 import Lights from './Lights';
 import Textures from './Textures';
 import FloorAndWall from './FloorAndWall';
+import Bench from '../containers/Bench';
 
 export default function Scene(props) {
 	const {
@@ -15,7 +16,7 @@ export default function Scene(props) {
 		worldPosition,
 		lightPosition,
 		lightTarget,
-		piece,
+		children,
 	} = props;
 
 	return (
@@ -47,7 +48,7 @@ export default function Scene(props) {
 
 				<FloorAndWall />
 
-				{piece}
+				{children}
 
 			</scene>
 		</React3>

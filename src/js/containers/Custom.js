@@ -27,7 +27,7 @@ class Custom extends Component {
 
 	render() {
 		const {
-			ui: { cubeWidth, cubeHeight },
+			ui,
 			scene: {
 				windowWidth,
 				windowHeight,
@@ -40,18 +40,18 @@ class Custom extends Component {
 			decrement,
 			children,
 		} = this.props;
-		
+
 		return (
 			<div>
 				<div>
 					<div>
 						<button onClick={() => decrement('cubeWidth')}>-</button>
-							width: {cubeWidth}
+							width: {ui.cubeWidth}
 						<button onClick={() => increment('cubeWidth')}>+</button>
 					</div>
 					<div>
 						<button onClick={() => decrement('cubeHeight')}>-</button>
-							height: {cubeHeight}
+							height: {ui.cubeHeight}
 						<button onClick={() => increment('cubeHeight')}>+</button>
 					</div>
 				</div>
@@ -63,8 +63,9 @@ class Custom extends Component {
 					worldPosition={worldPosition}
 					lightPosition={lightPosition}
 					lightTarget={lightTarget}
-					piece={children}
-				/>
+				>
+					{React.cloneElement(children, { ui })}
+				</Scene>
 			</div>
 		);
 	}
