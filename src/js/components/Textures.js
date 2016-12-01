@@ -7,7 +7,7 @@ export default function Textures() {
 
 			<texture
 				resourceId="blueTexture"
-				url="images/blue.jpg"
+				url="/images/blue.jpg"
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
@@ -24,7 +24,7 @@ export default function Textures() {
 
 			<texture
 				resourceId="blueTileTexture"
-				url="images/blueTile.png"
+				url="/images/blueTile.png"
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
@@ -41,7 +41,7 @@ export default function Textures() {
 
 			<texture
 				resourceId="whiteTileTexture"
-				url="images/whiteTile.png"
+				url="i/mages/whiteTile.png"
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
@@ -58,7 +58,7 @@ export default function Textures() {
 
 			<texture
 				resourceId="bananasTexture"
-				url="images/bananas.jpg"
+				url="/images/bananas.jpg"
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
