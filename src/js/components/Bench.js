@@ -4,7 +4,7 @@ import THREE from 'three';
 const benchWidth = 1;
 const woodThickness = 0.1;
 
-export default function Bench(props) {
+function Bench(props) {
 	const { ui: { cubeWidth } } = props;
 	const legSpacing = (cubeWidth / 2) - woodThickness;
 
@@ -59,3 +59,11 @@ export default function Bench(props) {
 		</group>
 	);
 }
+
+Bench.propTypes = {
+	ui: React.PropTypes.shape({
+		cubeWidth: React.PropTypes.number,
+	}),
+};
+
+export default Bench;

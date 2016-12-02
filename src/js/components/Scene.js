@@ -6,9 +6,8 @@ import OrthoCamera from './OrthoCamera';
 import Lights from './Lights';
 import Textures from './Textures';
 import FloorAndWall from './FloorAndWall';
-import Bench from '../containers/Bench';
 
-export default function Scene(props) {
+function Scene(props) {
 	const {
 		windowWidth,
 		windowHeight,
@@ -54,3 +53,15 @@ export default function Scene(props) {
 		</React3>
 	);
 }
+
+Scene.propTypes = {
+	windowWidth: React.PropTypes.number,
+	windowHeight: React.PropTypes.number,
+	cameraPosition: React.PropTypes.instanceOf(THREE.Vector3),
+	worldPosition: React.PropTypes.instanceOf(THREE.Vector3),
+	lightPosition: React.PropTypes.instanceOf(THREE.Vector3),
+	lightTarget: React.PropTypes.instanceOf(THREE.Vector3),
+	children: React.PropTypes.node,
+}
+
+export default Scene;

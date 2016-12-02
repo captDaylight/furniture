@@ -10,7 +10,7 @@ import Landing from './components/Landing';
 import Custom from './containers/Custom';
 
 // Furniture Objects
-import Bench from './containers/Bench';
+import Bench from './components/Bench';
 
 import reducers from './reducers';
 

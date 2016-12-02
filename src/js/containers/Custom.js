@@ -87,6 +87,7 @@ Custom.propTypes = {
 	increment: React.PropTypes.func,
 	decrement: React.PropTypes.func,
 	setWindowSize: React.PropTypes.func,
+	children: React.PropTypes.node,
 };
 
 export default connect(
