@@ -62,6 +62,6 @@ Scene.propTypes = {
 	lightPosition: React.PropTypes.instanceOf(THREE.Vector3),
 	lightTarget: React.PropTypes.instanceOf(THREE.Vector3),
 	children: React.PropTypes.node,
-}
+};
 
 export default Scene;

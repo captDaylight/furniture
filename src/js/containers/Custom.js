@@ -45,9 +45,9 @@ class Custom extends Component {
 			<div>
 				<div>
 					<div>
-						<button onClick={() => decrement('cubeWidth')}>-</button>
-							width: {ui.cubeWidth}
-						<button onClick={() => increment('cubeWidth')}>+</button>
+						<button onClick={() => decrement('benchLength')}>-</button>
+							width: {ui.benchLength}
+						<button onClick={() => increment('benchLength')}>+</button>
 					</div>
 					<div>
 						<button onClick={() => decrement('cubeHeight')}>-</button>
@@ -73,7 +73,7 @@ class Custom extends Component {
 
 Custom.propTypes = {
 	ui: React.PropTypes.shape({
-		cubeWidth: React.PropTypes.number,
+		benchLength: React.PropTypes.number,
 		cubeHeight: React.PropTypes.number,
 	}),
 	scene: React.PropTypes.shape({

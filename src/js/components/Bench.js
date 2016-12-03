@@ -5,8 +5,8 @@ const benchWidth = 1;
 const woodThickness = 0.1;
 
 function Bench(props) {
-	const { ui: { cubeWidth } } = props;
-	const legSpacing = (cubeWidth / 2) - woodThickness;
+	const { ui: { benchLength } } = props;
+	const legSpacing = (benchLength / 2) - woodThickness;
 
 	return (
 		<group
@@ -18,7 +18,7 @@ function Bench(props) {
 				castShadow
 			>
 				<boxGeometry
-					width={cubeWidth}
+					width={benchLength}
 					height={woodThickness}
 					depth={benchWidth}
 				/>
@@ -62,7 +62,7 @@ function Bench(props) {
 
 Bench.propTypes = {
 	ui: React.PropTypes.shape({
-		cubeWidth: React.PropTypes.number,
+		benchLength: React.PropTypes.number,
 	}),
 };
 
