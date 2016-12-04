@@ -2,10 +2,13 @@ import { isEqual } from 'lodash';
 
 const initialState = {
 	benchLength: 1,
-	finalBenchLength: 1,
-	woodThickness: 0.1,
+	finalBenchLength: 3,
+
 	legPositionX: 5,
 	finalLegPosX: 5,
+
+	woodThickness: 0.1,
+
 	animating: false,
 	cubeHeight: 1,
 };
@@ -36,11 +39,24 @@ export default function ui(state = initialState, action) {
 		};
 
 	case 'UPDATE_BENCH_LEG_POSITION':
-		console.log('updating back ?????', isEqual(action.legPositionX, state.finalLegPosX));
 		return {
 			...state,
 			legPositionX: action.legPositionX,
-			animating: !isEqual(action.legPositionX, state.finalLegPosX),
+			animating: action.legPositionX !== state.finalLegPosX,
+		};
+
+	case 'SET_FINAL_BENCH_LENGTH':
+		return {
+			...state,
+			finalBenchLength: action.benchLength,
+			animating: true,
+		};
+
+	case 'UPDATE_BENCH_LENGTH':
+		return {
+			...state,
+			benchLength: action.benchLength,
+			animating: action.benchLength !== state.finalBenchLength,
 		};
 
 	default:

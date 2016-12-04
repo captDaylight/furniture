@@ -16,10 +16,28 @@ import {
 	decrement as decrementAction,
 	setFinalBenchLegPos as setFinalBenchLegPosAction,
 	updateBenchLegPos as updateBenchLegPosAction,
+	setFinalBenchLength as setFinalBenchLengthAction,
+	updateBenchLength as updateBenchLengthAction,
 } from '../actions/ui';
 import { setWindowSize as setWindowSizeAction } from '../actions/scene';
 
 import Scene from '../components/Scene';
+
+function getNextAnimate(finalPos, newPos, speed) {
+	const diff = Math.abs(finalPos - newPos);
+	const change = diff * speed;
+	let newPosition = finalPos > newPos
+		? newPos + change
+		: newPos - change;
+
+	if (
+		newPosition > finalPos - 0.02
+		&& newPosition < finalPos + 0.02
+	) {
+		newPosition = finalPos;
+	}
+	return newPosition;
+}
 
 class Custom extends Component {
 	constructor(props, context) {
@@ -28,12 +46,11 @@ class Custom extends Component {
 
 		const {
 			setWindowSize,
-			ui: { benchLength, woodThickness },
+			ui: { finalBenchLength, woodThickness },
 			setFinalBenchLegPos,
 		} = props;
 
-
-		setFinalBenchLegPos((benchLength / 2) - woodThickness);
+		setFinalBenchLegPos((finalBenchLength / 2) - woodThickness);
 
 		// set size of window on init
 		setWindowSize(window.innerWidth, window.innerHeight);
@@ -46,25 +63,25 @@ class Custom extends Component {
 
 	onAnimate() {
 		const {
-			ui: { benchLength, animating, legPositionX, finalLegPosX },
+			ui: {
+				animating,
+				legPositionX,
+				finalLegPosX,
+				benchLength,
+				finalBenchLength,
+			},
 			updateBenchLegPos,
+			updateBenchLength,
 		} = this.props;
 
 		if (animating) {
-			const diff = Math.abs(finalLegPosX - legPositionX);
-			const change = diff * 0.1;
-			let newPosition = finalLegPosX > legPositionX
-				? legPositionX + change
-				: legPositionX - change;
-
-			if (
-				newPosition > finalLegPosX - 0.02
-				&& newPosition < finalLegPosX + 0.02
-			) {
-				newPosition = finalLegPosX;
+			if (finalLegPosX !== legPositionX) {
+				updateBenchLegPos(getNextAnimate(finalLegPosX, legPositionX, 0.2));
 			}
 
-			updateBenchLegPos(newPosition);
+			if (benchLength !== finalBenchLength) {
+				updateBenchLength(getNextAnimate(finalBenchLength, benchLength, 0.08));
+			}
 		}
 	};
 
@@ -88,9 +105,9 @@ class Custom extends Component {
 			<div>
 				<div>
 					<div>
-						<button onClick={() => decrement('benchLength')}>-</button>
-							width: {ui.benchLength}
-						<button onClick={() => increment('benchLength')}>+</button>
+						<button onClick={() => decrement('finalBenchLength')}>-</button>
+							width: {ui.finalBenchLength}
+						<button onClick={() => increment('finalBenchLength')}>+</button>
 					</div>
 					<div>
 						<button onClick={() => decrement('cubeHeight')}>-</button>
@@ -139,7 +156,7 @@ class Custom extends Component {
 
 Custom.propTypes = {
 	ui: React.PropTypes.shape({
-		benchLength: React.PropTypes.number,
+		finalBenchLength: React.PropTypes.number,
 		cubeHeight: React.PropTypes.number,
 	}),
 	scene: React.PropTypes.shape({
@@ -165,5 +182,7 @@ export default connect(
 		setWindowSize: setWindowSizeAction,
 		setFinalBenchLegPos: setFinalBenchLegPosAction,
 		updateBenchLegPos: updateBenchLegPosAction,
+		setFinalBenchLength: setFinalBenchLengthAction,
+		updateBenchLength: updateBenchLengthAction,
 	},
 )(Custom);
