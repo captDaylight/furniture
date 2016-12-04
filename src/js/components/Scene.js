@@ -16,6 +16,7 @@ function Scene(props) {
 		lightPosition,
 		lightTarget,
 		children,
+		onAnimate,
 	} = props;
 
 	return (
@@ -23,6 +24,7 @@ function Scene(props) {
 			mainCamera="camera"
 			width={windowWidth}
 			height={windowHeight}
+			onAnimate={onAnimate}
 			alpha
 			antialias
 			gammaInput

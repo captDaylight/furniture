@@ -5,13 +5,15 @@ const benchWidth = 1;
 const woodThickness = 0.1;
 
 function Bench(props) {
-	const { ui: { benchLength } } = props;
-	const legSpacing = (benchLength / 2) - woodThickness;
+	const { ui: { benchLength, legPositionX } } = props;
 
 	return (
 		<group
 			position={new THREE.Vector3(0, 0, 1)}
 		>
+			{
+				// BENCH TOP
+			}
 			<mesh
 				position={new THREE.Vector3(0, 1.5, 0)}
 				receiveShadow
@@ -27,8 +29,11 @@ function Bench(props) {
 				/>
 			</mesh>
 
+			{
+				// RIGHT LEG
+			}
 			<mesh
-				position={new THREE.Vector3(legSpacing, 0.75, 0)}
+				position={new THREE.Vector3(legPositionX, 0.75, 0)}
 				receiveShadow
 				castShadow
 			>
@@ -42,8 +47,11 @@ function Bench(props) {
 				/>
 			</mesh>
 
+			{
+				// LEFT LEG
+			}
 			<mesh
-				position={new THREE.Vector3(-legSpacing, 0.75, 0)}
+				position={new THREE.Vector3(-legPositionX, 0.75, 0)}
 				receiveShadow
 				castShadow
 			>
@@ -63,6 +71,7 @@ function Bench(props) {
 Bench.propTypes = {
 	ui: React.PropTypes.shape({
 		benchLength: React.PropTypes.number,
+		legPositionX: React.PropTypes.number,
 	}),
 };
 

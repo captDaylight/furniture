@@ -2,10 +2,20 @@ import React, { Component } from 'react';
 import THREE from 'three';
 import { connect } from 'react-redux';
 
+import React3 from 'react-three-renderer';
+
+import OrthoCamera from '../components/OrthoCamera';
+import Lights from '../components/Lights';
+import Textures from '../components/Textures';
+import FloorAndWall from '../components/FloorAndWall';
+import Bench from '../components/Bench';
+
 import {
 	rotate as rotateAction,
 	increment as incrementAction,
 	decrement as decrementAction,
+	setFinalBenchLegPos as setFinalBenchLegPosAction,
+	updateBenchLegPos as updateBenchLegPosAction,
 } from '../actions/ui';
 import { setWindowSize as setWindowSizeAction } from '../actions/scene';
 
@@ -14,7 +24,16 @@ import Scene from '../components/Scene';
 class Custom extends Component {
 	constructor(props, context) {
 		super(props, context);
-		const { setWindowSize } = props;
+		this.onAnimate = this.onAnimate.bind(this);
+
+		const {
+			setWindowSize,
+			ui: { benchLength, woodThickness },
+			setFinalBenchLegPos,
+		} = props;
+
+
+		setFinalBenchLegPos((benchLength / 2) - woodThickness);
 
 		// set size of window on init
 		setWindowSize(window.innerWidth, window.innerHeight);
@@ -24,6 +43,30 @@ class Custom extends Component {
 			setWindowSize(window.innerWidth, window.innerHeight);
 		});
 	}
+
+	onAnimate() {
+		const {
+			ui: { benchLength, animating, legPositionX, finalLegPosX },
+			updateBenchLegPos,
+		} = this.props;
+
+		if (animating) {
+			const diff = Math.abs(finalLegPosX - legPositionX);
+			const change = diff * 0.1;
+			let newPosition = finalLegPosX > legPositionX
+				? legPositionX + change
+				: legPositionX - change;
+
+			if (
+				newPosition > finalLegPosX - 0.02
+				&& newPosition < finalLegPosX + 0.02
+			) {
+				newPosition = finalLegPosX;
+			}
+
+			updateBenchLegPos(newPosition);
+		}
+	};
 
 	render() {
 		const {
@@ -56,16 +99,39 @@ class Custom extends Component {
 					</div>
 				</div>
 
-				<Scene
-					windowWidth={windowWidth}
-					windowHeight={windowHeight}
-					cameraPosition={cameraPosition}
-					worldPosition={worldPosition}
-					lightPosition={lightPosition}
-					lightTarget={lightTarget}
+				<React3
+					mainCamera="camera"
+					width={windowWidth}
+					height={windowHeight}
+					onAnimate={this.onAnimate}
+					alpha
+					antialias
+					gammaInput
+					gammaOutput
+					shadowMapEnabled
 				>
-					{React.cloneElement(children, { ui })}
-				</Scene>
+					<scene>
+
+						<Lights
+							lightPosition={lightPosition}
+							lightTarget={lightTarget}
+						/>
+
+						<Textures />
+
+						<OrthoCamera
+							width={windowWidth}
+							height={windowHeight}
+							cameraPosition={cameraPosition}
+							worldPosition={worldPosition}
+						/>
+
+						<FloorAndWall />
+
+						<Bench {...this.props} />
+
+					</scene>
+				</React3>
 			</div>
 		);
 	}
@@ -97,5 +163,7 @@ export default connect(
 		increment: incrementAction,
 		decrement: decrementAction,
 		setWindowSize: setWindowSizeAction,
+		setFinalBenchLegPos: setFinalBenchLegPosAction,
+		updateBenchLegPos: updateBenchLegPosAction,
 	},
 )(Custom);
