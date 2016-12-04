@@ -1,12 +1,10 @@
 import { isEqual } from 'lodash';
-
+console.log(isEqual);
 const initialState = {
 	benchLength: 1,
-
-	legPos: [0, 0, 0],
-	finalLegPos: [0, 0, 0],
+	legPositionX: 10,
+	finalLegPosX: 10,
 	animatingLeg: false,
-
 	cubeHeight: 1,
 };
 
@@ -25,17 +23,19 @@ export default function ui(state = initialState, action) {
 		};
 
 	case 'SET_FINAL_BENCH_LEG_POS':
+		console.log('SETTING FINAL POS', true);
 		return {
 			...state,
-			finalLegPos: [...action.finalLegPos],
+			finalLegPosX: action.legPositionX,
 			animatingLeg: true,
 		};
 
 	case 'UPDATE_BENCH_LEG_POSITION':
+		console.log('updating back ?????', isEqual(action.legPositionX, state.finalLegPosX));
 		return {
 			...state,
-			legPosition: [...action.legPosition],
-			animatingLeg: isEqual(action.legPosition, state.finalLegPos),
+			legPositionX: action.legPositionX,
+			animatingLeg: !isEqual(action.legPositionX, state.finalLegPosX),
 		};
 
 	default:

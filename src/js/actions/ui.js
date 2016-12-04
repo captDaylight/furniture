@@ -6,16 +6,16 @@ export function decrement(dimension) {
 	return { type: 'DECREMENT', dimension };
 }
 
-export function setFinalBenchLegPos(legPosition) {
+export function setFinalBenchLegPos(legPositionX) {
 	return {
 		type: 'SET_FINAL_BENCH_LEG_POS',
-		legPosition,
+		legPositionX,
 	};
 }
 
-export function updateBenchLegPos(legPosition) {
+export function updateBenchLegPos(legPositionX) {
 	return {
 		type: 'UPDATE_BENCH_LEG_POSITION',
-		legPosition,
+		legPositionX,
 	};
 }
