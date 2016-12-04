@@ -25,13 +25,15 @@ class Custom extends Component {
 	constructor(props, context) {
 		super(props, context);
 		this.onAnimate = this.onAnimate.bind(this);
+
 		const {
 			setWindowSize,
-			ui: { benchLength },
+			ui: { benchLength, woodThickness },
 			setFinalBenchLegPos,
 		} = props;
-		//
-		setFinalBenchLegPos((benchLength / 2));
+
+
+		setFinalBenchLegPos((benchLength / 2) - woodThickness);
 
 		// set size of window on init
 		setWindowSize(window.innerWidth, window.innerHeight);
@@ -44,13 +46,13 @@ class Custom extends Component {
 
 	onAnimate() {
 		const {
-			ui: { benchLength, animatingLeg, legPositionX, finalLegPosX },
+			ui: { benchLength, animating, legPositionX, finalLegPosX },
 			updateBenchLegPos,
 		} = this.props;
 
-		if (animatingLeg) {
+		if (animating) {
 			const diff = Math.abs(finalLegPosX - legPositionX);
-			const change = diff * 0.2;
+			const change = diff * 0.1;
 			let newPosition = finalLegPosX > legPositionX
 				? legPositionX + change
 				: legPositionX - change;
