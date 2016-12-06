@@ -9,9 +9,6 @@ import thunk from 'redux-thunk';
 import Landing from './components/Landing';
 import Custom from './containers/Custom';
 
-// Furniture Objects
-import Bench from './components/Bench';
-
 import reducers from './reducers';
 
 const store = createStore(reducers, applyMiddleware(thunk));
@@ -23,7 +20,7 @@ ReactDOM.render(
 		<Router history={browserHistory}>
 			<Route path="/" component={Landing} />
 			<Route path="object" component={Custom}>
-				<Route path="bench" component={Bench} />
+				<Route path="bench" />
 			</Route>
 		</Router>
 	</Provider>),

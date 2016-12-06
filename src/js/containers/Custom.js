@@ -21,8 +21,6 @@ import {
 } from '../actions/ui';
 import { setWindowSize as setWindowSizeAction } from '../actions/scene';
 
-import Scene from '../components/Scene';
-
 function getNextAnimate(finalPos, newPos, speed) {
 	const diff = Math.abs(finalPos - newPos);
 	const change = diff * speed;
@@ -59,6 +57,11 @@ class Custom extends Component {
 			// listen for changes in size of window and set new size
 			setWindowSize(window.innerWidth, window.innerHeight);
 		});
+
+		this._onManualRenderTriggerCreated = (renderTrigger) => {
+			// assign to variable to be able to reuse the trigger
+			this._renderTrigger = renderTrigger;
+		};
 	}
 
 	onAnimate() {
@@ -98,7 +101,6 @@ class Custom extends Component {
 			},
 			increment,
 			decrement,
-			children,
 		} = this.props;
 
 		return (
@@ -121,6 +123,8 @@ class Custom extends Component {
 					width={windowWidth}
 					height={windowHeight}
 					onAnimate={this.onAnimate}
+					forceManualRender={!ui.animating}
+					onManualRenderTriggerCreated={this._onManualRenderTriggerCreated}
 					alpha
 					antialias
 					gammaInput
@@ -169,8 +173,10 @@ Custom.propTypes = {
 	}),
 	increment: React.PropTypes.func,
 	decrement: React.PropTypes.func,
+	updateBenchLegPos: React.PropTypes.func,
+	updateBenchLength: React.PropTypes.func,
+	setFinalBenchLegPos: React.PropTypes.func,
 	setWindowSize: React.PropTypes.func,
-	children: React.PropTypes.node,
 };
 
 export default connect(
