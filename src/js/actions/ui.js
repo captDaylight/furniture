@@ -1,10 +1,9 @@
-// TODO remove dimension
-export function increment(dimension) {
-	return { type: 'INCREMENT', dimension };
+export function increment() {
+	return { type: 'INCREMENT_BENCH_LENGTH' };
 }
 
-export function decrement(dimension) {
-	return { type: 'DECREMENT', dimension };
+export function decrement() {
+	return { type: 'DECREMENT_BENCH_LENGTH' };
 }
 
 export function setFinalBenchLegPos(legPositionX) {

@@ -86,7 +86,7 @@ class Custom extends Component {
 				updateBenchLength(getNextAnimate(finalBenchLength, benchLength, 0.08));
 			}
 		}
-	};
+	}
 
 	render() {
 		const {
@@ -107,14 +107,9 @@ class Custom extends Component {
 			<div>
 				<div>
 					<div>
-						<button onClick={() => decrement('finalBenchLength')}>-</button>
+						<button onClick={() => decrement()}>-</button>
 							width: {ui.finalBenchLength}
-						<button onClick={() => increment('finalBenchLength')}>+</button>
-					</div>
-					<div>
-						<button onClick={() => decrement('cubeHeight')}>-</button>
-							height: {ui.cubeHeight}
-						<button onClick={() => increment('cubeHeight')}>+</button>
+						<button onClick={() => increment()}>+</button>
 					</div>
 				</div>
 
@@ -161,7 +156,6 @@ class Custom extends Component {
 Custom.propTypes = {
 	ui: React.PropTypes.shape({
 		finalBenchLength: React.PropTypes.number,
-		cubeHeight: React.PropTypes.number,
 	}),
 	scene: React.PropTypes.shape({
 		windowWidth: React.PropTypes.number,

@@ -1,35 +1,38 @@
-import { isEqual } from 'lodash';
-
 const initialState = {
+	minBenchLength: 1,
+	maxBenchLength: 8,
+	woodThickness: 0.1,
+
 	benchLength: 1,
 	finalBenchLength: 3,
 
 	legPositionX: 5,
 	finalLegPosX: 5,
 
-	woodThickness: 0.1,
-
 	animating: false,
-	cubeHeight: 1,
 };
 
 export default function ui(state = initialState, action) {
 	switch (action.type) {
-	case 'INCREMENT':
-		return {
-			...state,
-			[action.dimension]: state[action.dimension] + 1,
-			finalLegPosX: ((state[action.dimension] + 1) / 2) - state.woodThickness,
-			animating: true,
-		};
+	case 'INCREMENT_BENCH_LENGTH':
+		return state.finalBenchLength + 1 <= state.maxBenchLength
+			? {
+				...state,
+				finalBenchLength: state.finalBenchLength + 1,
+				finalLegPosX: ((state.finalBenchLength + 1) / 2) - state.woodThickness,
+				animating: true,
+			}
+			: { ...state };
 
-	case 'DECREMENT':
-		return {
+	case 'DECREMENT_BENCH_LENGTH':
+		return state.finalBenchLength - 1 >= state.minBenchLength
+		? {
 			...state,
-			[action.dimension]: state[action.dimension] - 1,
-			finalLegPosX: ((state[action.dimension] - 1) / 2) - state.woodThickness,
+			finalBenchLength: state.finalBenchLength - 1,
+			finalLegPosX: ((state.finalBenchLength - 1) / 2) - state.woodThickness,
 			animating: true,
-		};
+		}
+		: { ...state };
 
 	case 'SET_FINAL_BENCH_LEG_POS':
 		return {
