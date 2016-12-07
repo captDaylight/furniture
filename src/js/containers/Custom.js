@@ -53,15 +53,16 @@ class Custom extends Component {
 		// set size of window on init
 		setWindowSize(window.innerWidth, window.innerHeight);
 
-		window.addEventListener('resize', () => {
-			// listen for changes in size of window and set new size
-			setWindowSize(window.innerWidth, window.innerHeight);
-		});
-
 		this._onManualRenderTriggerCreated = (renderTrigger) => {
 			// assign to variable to be able to reuse the trigger
 			this._renderTrigger = renderTrigger;
 		};
+
+		window.addEventListener('resize', () => {
+			// listen for changes in size of window and set new size
+			setWindowSize(window.innerWidth, window.innerHeight);
+			this._renderTrigger();
+		});
 	}
 
 	onAnimate() {
