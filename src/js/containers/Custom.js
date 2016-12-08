@@ -53,15 +53,15 @@ class Custom extends Component {
 		// set size of window on init
 		setWindowSize(window.innerWidth, window.innerHeight);
 
-		this._onManualRenderTriggerCreated = (renderTrigger) => {
+		this.onManualRenderTriggerCreated = (renderTrigger) => {
 			// assign to variable to be able to reuse the trigger
-			this._renderTrigger = renderTrigger;
+			this.renderTrigger = renderTrigger;
 		};
 
 		window.addEventListener('resize', () => {
 			// listen for changes in size of window and set new size
 			setWindowSize(window.innerWidth, window.innerHeight);
-			this._renderTrigger();
+			this.renderTrigger();
 		});
 	}
 
@@ -120,7 +120,7 @@ class Custom extends Component {
 					height={windowHeight}
 					onAnimate={this.onAnimate}
 					forceManualRender={!ui.animating}
-					onManualRenderTriggerCreated={this._onManualRenderTriggerCreated}
+					onManualRenderTriggerCreated={this.onManualRenderTriggerCreated}
 					alpha
 					antialias
 					gammaInput
