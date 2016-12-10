@@ -7,19 +7,20 @@ const app = express();
 const compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
-  publicPath: config.output.publicPath
+	publicPath: config.output.publicPath,
 }));
 
-app.use(express.static('static'))
+app.use(express.static('static'));
 
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.use('/', require('./routes/pages'));
 
-app.listen(3000, function(err) {
-  if (err) {
-    return console.error(err);
-  }
+app.listen(3000, (err) => {
+	if (err) {
+		return console.error(err);
+	}
 
-  console.log('Listening at http://localhost:3000/');
-})
+	console.log('Listening at http://localhost:3000/');
+	return;
+});
