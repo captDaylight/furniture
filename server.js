@@ -12,15 +12,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(express.static('static'))
 
-app.set('view engine', 'html');
-
 app.use(require('webpack-hot-middleware')(compiler));
 
-
-
-// app.get('*', function(req, res) {
-//   res.sendFile(path.join(__dirname, 'index.html'));
-// });
 app.use('/', require('./routes/pages'));
 
 app.listen(3000, function(err) {
