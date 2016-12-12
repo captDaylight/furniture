@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 // Page Components
 import Landing from './components/Landing';
 import Custom from './containers/Custom';
+import MatInterface from './containers/MatInterface';
 
 import reducers from './reducers';
 
@@ -22,6 +23,7 @@ ReactDOM.render(
 			<Route path="object" component={Custom}>
 				<Route path="bench" />
 			</Route>
+			<Route path="mat" component={MatInterface} />
 		</Router>
 	</Provider>),
 	document.getElementById('root'),
