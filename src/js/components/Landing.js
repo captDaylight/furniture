@@ -5,7 +5,8 @@ export default function Landing() {
 	return (
 		<div>
 			<h1>Landing</h1>
-			<Link to="/object/bench">Bench</Link>
+			<div><Link to="/object/bench">Bench</Link></div>
+			<div><Link to="/mat">Mat</Link></div>
 		</div>
 	);
 }
