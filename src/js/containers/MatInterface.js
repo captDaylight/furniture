@@ -72,7 +72,7 @@ class MatInterface extends Component {
 		return (
 			<div>
 				<div className="editor-container">
-					Editor Container
+					Editor Container rrrr
 				</div>
 				<div className="scene-container">
 					Scene Container

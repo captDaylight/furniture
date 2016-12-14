@@ -7,10 +7,13 @@ import thunk from 'redux-thunk';
 
 // Page Components
 import Landing from './components/Landing';
-import Custom from './containers/Custom';
 import MatInterface from './containers/MatInterface';
 
 import reducers from './reducers';
+
+if (module.hot) {
+	module.hot.accept();
+}
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -19,11 +22,7 @@ require('../scss/main.scss');
 ReactDOM.render(
 	(<Provider store={store}>
 		<Router history={browserHistory}>
-			<Route path="/" component={Landing} />
-			<Route path="object" component={Custom}>
-				<Route path="bench" />
-			</Route>
-			<Route path="mat" component={MatInterface} />
+			<Route path="/" component={MatInterface} />
 		</Router>
 	</Provider>),
 	document.getElementById('root'),
