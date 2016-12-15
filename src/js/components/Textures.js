@@ -41,7 +41,7 @@ export default function Textures() {
 
 			<texture
 				resourceId="whiteTileTexture"
-				url="i/mages/whiteTile.png"
+				url="/images/whiteTile.png"
 				wrapS={THREE.RepeatWrapping}
 				wrapT={THREE.RepeatWrapping}
 				anisotropy={16}
