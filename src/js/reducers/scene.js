@@ -5,7 +5,7 @@ const initialState = {
 	windowHeight: 0,
 	cameraPosition: new THREE.Vector3(5, 5, 5),
 	worldPosition: new THREE.Vector3(0, 0, 0),
-	lightPosition: new THREE.Vector3(-4, 8, 5),
+	lightPosition: new THREE.Vector3(-4, 4, 5),
 	lightTarget: new THREE.Vector3(0, 0, 0),
 	units: 0, // 0 === imperial, 1 === metric
 };

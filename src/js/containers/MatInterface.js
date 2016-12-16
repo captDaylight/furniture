@@ -125,19 +125,57 @@ class MatInterface extends Component {
 						<FloorAndWall />
 
 						<mesh
-							position={new THREE.Vector3(0, 1.5, 1)}
+							position={new THREE.Vector3(-1, 0.03, 1)}
 							receiveShadow
 							castShadow
 		        >
 		          <boxGeometry
-		            width={1}
-		            height={1}
-		            depth={1}
+		            width={0.2}
+		            height={0.075}
+		            depth={3.3}
 		          />
 		          <meshLambertMaterial
-		            color={0xe9bcb5}
+		            color={0xFA6ACC}
 		          />
 		        </mesh>
+
+						<mesh
+							position={new THREE.Vector3(1, 0.03, 1)}
+							receiveShadow
+							castShadow
+		        >
+		          <boxGeometry
+		            width={0.2}
+		            height={0.075}
+		            depth={3.3}
+		          />
+		          <meshLambertMaterial
+		            color={0xFA6ACC}
+		          />
+		        </mesh>
+						{
+							[0,0,0,0,0,0,0,0,0].map((k, i) => {
+								return (
+									<mesh
+										position={new THREE.Vector3(0, 0.1, ((i * 0.3) + 0.1))}
+										receiveShadow
+										castShadow
+									>
+										<boxGeometry
+											width={3}
+											height={0.075}
+											depth={0.2}
+										/>
+										<meshLambertMaterial
+											color={0xFA6ACC}
+										/>
+									</mesh>
+								)
+							})
+						}
+
+
+
 
 					</scene>
 				</React3>

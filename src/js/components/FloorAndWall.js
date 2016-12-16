@@ -18,7 +18,7 @@ export default function FloorAndWall() {
 					height={25}
 				/>
 				<materialResource
-					resourceId="whiteTileMaterial"
+					resourceId="blueTileMaterial"
 				/>
 			</mesh>
 
@@ -34,7 +34,7 @@ export default function FloorAndWall() {
 					height={25}
 				/>
 				<materialResource
-					resourceId="whiteTileMaterial"
+					resourceId="blueTileMaterial"
 				/>
 			</mesh>
 		</group>
