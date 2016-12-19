@@ -8,10 +8,10 @@ function OrthoCamera(props) {
 		<orthographicCamera
 			name="camera"
 
-			left={width / -200}
-			right={width / 200}
-			top={height / 200}
-			bottom={height / -200}
+			left={width / -250}
+			right={width / 250}
+			top={height / 250}
+			bottom={height / -250}
 			near={0.5}
 			far={500}
 

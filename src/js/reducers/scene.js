@@ -3,7 +3,7 @@ import THREE from 'three';
 const initialState = {
 	windowWidth: 0,
 	windowHeight: 0,
-	cameraPosition: new THREE.Vector3(5, 5, 5),
+	cameraPosition: new THREE.Vector3(10, 10, 10),
 	worldPosition: new THREE.Vector3(0, 0, 0),
 	lightPosition: new THREE.Vector3(-4, 4, 5),
 	lightTarget: new THREE.Vector3(0, 0, 0),
